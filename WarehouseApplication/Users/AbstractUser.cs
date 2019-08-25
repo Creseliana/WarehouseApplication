@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseApplication.Service;
 
 namespace WarehouseApplication.Users
 {
@@ -14,19 +15,26 @@ namespace WarehouseApplication.Users
 
         public int Id { get; set; }
         public string Login { get; set; }
-        private string password;
-        public string Password //encrypt decrypt
-        {
-            get
-            {
-                return this.password;
-            }
-            set
-            {
-                this.password = value;
-            }
-        }
+        public string Password { get; set; }
         public int Role { get; set; }
         public string FullName { get; set; }
+
+        public AbstractUser(int id, string login, string password, int role, string fullName)
+        {
+            this.Id = id;
+            this.Login = login;
+            this.Password = password;
+            this.Role = role;
+            this.FullName = fullName;
+        }
+
+        public AbstractUser(AbstractUser user)
+        {
+            this.Id = user.Id;
+            this.Login = user.Login;
+            this.Password = user.Password;
+            this.Role = user.Role;
+            this.FullName = user.FullName;
+        }
     }
 }

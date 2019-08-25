@@ -55,7 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\ReadObjectFromFileException.cs" />
     <Compile Include="Service\Auth.cs" />
+    <Compile Include="Service\EncDec.cs" />
+    <Compile Include="Service\MethodsDB.cs" />
     <Compile Include="Users\AbstractUser.cs" />
     <Compile Include="Users\Administrator.cs" />
     <Compile Include="Users\Manager.cs" />
@@ -112,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DB\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
