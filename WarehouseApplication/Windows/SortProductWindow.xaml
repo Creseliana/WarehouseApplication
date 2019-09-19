@@ -1,0 +1,33 @@
+﻿<Window x:Class="WarehouseApplication.Windows.SortProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseApplication.Windows"
+        mc:Ignorable="d"
+        Title="Сортировка продукции" Height="180" Width="280"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="SortButton" Content="ОК" IsDefault="True" Grid.Column="1" Grid.Row="3" Height="23" Width="75" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="SortButton_Click"/>
+        <Button Content="Отмена" IsCancel="True" Grid.Column="3" Grid.Row="3" Height="23" Width="75" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="4" Text="Параметры сортировки:" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <RadioButton x:Name="ByName" GroupName="Param" Content="По наименованию" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="ByName_Checked"/>
+        <RadioButton x:Name="ByAmount" GroupName="Param" Content="По количеству" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="ByAmount_Checked"/>
+        <RadioButton x:Name="Ascending" GroupName="Order" Content="По возрастанию" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="Ascending_Checked"/>
+        <RadioButton x:Name="Descending" GroupName="Order" Content="По убыванию" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="Descending_Checked"/>
+    </Grid>
+</Window>

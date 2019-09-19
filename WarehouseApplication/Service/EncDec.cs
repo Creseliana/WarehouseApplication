@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WarehouseApplication.Service
 {
     sealed class EncDec
     {
-        private static int key = 33;
-        private static char separator = '-';
-        public static string encrypt(string line)
+        private static readonly int key = 33;
+        private static readonly char separator = '-';
+
+        internal static string Encrypt(string line)
         {
             string encryptedLine = "";
             for (int i = 0; i < line.Length; i++)
@@ -21,7 +18,7 @@ namespace WarehouseApplication.Service
             return encryptedLine;
         }
 
-        public static string decrypt(string line)
+        internal static string Decrypt(string line)
         {
             string decryptedLine = "";
             string[] splitLine = line.Split(separator);

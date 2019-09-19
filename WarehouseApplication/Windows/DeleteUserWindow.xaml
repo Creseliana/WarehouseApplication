@@ -1,0 +1,30 @@
+﻿<Window x:Class="WarehouseApplication.Windows.DeleteUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarehouseApplication.Windows"
+        mc:Ignorable="d"
+        Title="Удаление пользователя" Height="180" Width="300"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Логин пользователя" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="LoginTextBox" Grid.Column="1" Grid.Row="2" Height="23" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="LoginTextBox_TextChanged"/>
+        <Button x:Name="DeleteButton" Content="Удалить" IsDefault="True" Grid.Column="1" Grid.Row="3" Height="23" Width="75" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="DeleteButton_Click"/>
+        <Button Content="Отмена" IsCancel="True" Grid.Column="3" Grid.Row="3" Height="23" Width="75" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

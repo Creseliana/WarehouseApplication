@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WarehouseApplication.DB;
+using WarehouseApplication.Service;
 
 namespace WarehouseApplication
 {
@@ -22,6 +13,18 @@ namespace WarehouseApplication
     {
         public MainWindow()
         {
+            Uri iconUri = new Uri("icon.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
+            if (!MethodsDB.WriteUsersFromFile(UserDB.pathUserDB, UserDB.userDB))
+            {
+                MessageBox.Show("Ошибка считывания базы данных пользователей", "Ошибка");
+                Application.Current.Shutdown();
+            }
+            if (!MethodsDB.WriteProductsFromFile(ProductDB.pathProductDB, ProductDB.productDB))
+            {
+                MessageBox.Show("Ошибка считывания базы данных продукции", "Ошибка");
+                Application.Current.Shutdown();
+            }
             InitializeComponent();
         }
     }

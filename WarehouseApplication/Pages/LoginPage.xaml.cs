@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WarehouseApplication.DB;
 using WarehouseApplication.Service;
 using WarehouseApplication.Users;
 
@@ -25,16 +15,9 @@ namespace WarehouseApplication.Pages
         private string inputLogin;
         private string inputPassword;
         private AbstractUser user;
-        private string path = "userDB.bin";
-        private List<AbstractUser> userList = new List<AbstractUser>();
 
         public LoginPage()
         {
-            if(!MethodsDB.WriteUsersFromFile(path, userList))
-            {
-                MessageBox.Show("Ошибка получения пользователей", "Ошибка");
-                Application.Current.Shutdown();
-            }
             InitializeComponent();
         }
 
@@ -53,12 +36,22 @@ namespace WarehouseApplication.Pages
             if (string.IsNullOrWhiteSpace(inputLogin) || string.IsNullOrWhiteSpace(inputPassword))
             {
                 MessageBox.Show("Все поля должны быть заполнены", "Ошибка");
-            } else
+            }
+            else
             {
-                user = Auth.CheckUser(inputLogin, inputPassword, userList);
-                if(user != null)
+                user = Auth.CheckUser(inputLogin, inputPassword, UserDB.userDB);
+                if (user != null)
                 {
-                    NavigationService.Navigate(new Page1());
+                    if (user.Role == AbstractUser.ADMIN)
+                    {
+                        NavigationService.Navigate(new ProductListPage());
+                    }
+                    else if (user.Role == AbstractUser.MANAGER)
+                    {
+                        ProductListPage productListPage = new ProductListPage();
+                        productListPage.UserPage.Visibility = Visibility.Collapsed;
+                        NavigationService.Navigate(productListPage);
+                    }
                 }
                 else
                 {
@@ -69,7 +62,12 @@ namespace WarehouseApplication.Pages
 
         private void SubmitWithoutAuth_Click(object sender, RoutedEventArgs e)
         {
-
+            ProductListPage productListPage = new ProductListPage();
+            productListPage.UserPage.Visibility = Visibility.Collapsed;
+            productListPage.Add.Visibility = Visibility.Collapsed;
+            productListPage.Edit.Visibility = Visibility.Collapsed;
+            productListPage.Delete.Visibility = Visibility.Collapsed;
+            NavigationService.Navigate(productListPage);
         }
     }
 }
