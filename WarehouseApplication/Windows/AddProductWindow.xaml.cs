@@ -3,11 +3,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using WarehouseApplication.DB;
+using WarehouseApplication.Exceptions;
 
 namespace WarehouseApplication.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для AddProductWindow.xaml
+    /// Dialog window for adding products
     /// </summary>
     public partial class AddProductWindow : Window
     {
@@ -23,39 +24,45 @@ namespace WarehouseApplication.Windows
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets user input product name from the text box
+        /// </summary>
         private void ProductNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             productName = ProductNameTextBox.Text;
         }
 
+        /// <summary>
+        /// Gets user input product amount from the text box as string
+        /// </summary>
         private void ProductAmountTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             strProductAmount = ProductAmountTextBox.Text;
         }
 
+        /// <summary>
+        /// Tries parse product amount string into integer value
+        /// </summary>
+        /// <returns>
+        /// true - string parsed into integer successfully
+        /// </returns>
         private bool GetProductAmount()
         {
             return Int32.TryParse(strProductAmount, out productAmount);
         }
 
+        /// <summary>
+        /// Checks user input and adds product to the database
+        /// </summary>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(productName))
+            try
             {
-                MessageBox.Show("Все поля должны быть заполнены", "Ошибка");
-            }
-            else if (!GetProductAmount())
-            {
-                MessageBox.Show("Количество должно быть целочисленным значением", "Ошибка");
-                ProductAmountTextBox.Clear();
-            }
-            else if (productAmount == 0)
-            {
-                MessageBox.Show("Количество должно быть больше нуля", "Ошибка");
-                ProductAmountTextBox.Clear();
-            }
-            else
-            {
+                if (string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(strProductAmount))
+                    throw new EmptyFieldException();
+                if (!GetProductAmount()) throw new WrongDataFieldException();
+                if (productAmount == 0) throw new WrongDataFieldException();
+
                 if (!productDB.CheckProductName(productName))
                 {
                     MessageBoxResult result = MessageBox.Show("Продукция с таким наименованием уже существует.\n" +
@@ -82,6 +89,15 @@ namespace WarehouseApplication.Windows
                         this.DialogResult = true;
                     }
                 }
+            }
+            catch (WrongDataFieldException exception)
+            {
+                MessageBox.Show(exception.ErrorMessage, exception.Error);
+                ProductAmountTextBox.Clear();
+            }
+            catch (EmptyFieldException exception)
+            {
+                MessageBox.Show(exception.ErrorMessage, exception.Error);
             }
         }
     }

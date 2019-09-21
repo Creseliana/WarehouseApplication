@@ -5,6 +5,11 @@ using WarehouseApplication.Users;
 
 namespace WarehouseApplication.DB
 {
+    /// <summary>
+    /// Implements interface <see cref="IUserDB"/>
+    /// Keeps file path to .bin file with database
+    /// Keeps information from database in ObservableCollection
+    /// </summary>
     sealed class UserDB : IUserDB
     {
         public static ObservableCollection<AbstractUser> userDB = new ObservableCollection<AbstractUser>();
@@ -58,6 +63,12 @@ namespace WarehouseApplication.DB
             return true;
         }
 
+        /// <summary>
+        /// Searches in database for the biggest user ID
+        /// </summary>
+        /// <returns>
+        /// The biggest user ID + 1 (next ID for new user)
+        /// </returns>
         private int GetNextId()
         {
             int biggestId = userDB[0].Id;

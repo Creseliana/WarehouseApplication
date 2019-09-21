@@ -59,7 +59,12 @@
     <Compile Include="DB\IUserDB.cs" />
     <Compile Include="DB\ProductDB.cs" />
     <Compile Include="DB\UserDB.cs" />
-    <Compile Include="Exceptions\ReadObjectFromFileException.cs" />
+    <Compile Include="Exceptions\EmptyFieldException.cs" />
+    <Compile Include="Exceptions\FieldException.cs" />
+    <Compile Include="Exceptions\ProductDataFieldException.cs" />
+    <Compile Include="Exceptions\UserDataFieldException.cs" />
+    <Compile Include="Exceptions\WindowException.cs" />
+    <Compile Include="Exceptions\WrongDataFieldException.cs" />
     <Compile Include="Pages\ProductListPage.xaml.cs">
       <DependentUpon>ProductListPage.xaml</DependentUpon>
     </Compile>
@@ -75,8 +80,6 @@
     <Compile Include="Users\Administrator.cs" />
     <Compile Include="Users\Manager.cs" />
     <Compile Include="Users\User.cs" />
-    <Compile Include="Warehouses\IWarehouse.cs" />
-    <Compile Include="Warehouses\Warehouse.cs" />
     <Compile Include="Windows\AddProductWindow.xaml.cs">
       <DependentUpon>AddProductWindow.xaml</DependentUpon>
     </Compile>

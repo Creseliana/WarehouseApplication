@@ -6,7 +6,7 @@ using WarehouseApplication.DB;
 namespace WarehouseApplication.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для SortProductWindow.xaml
+    /// Dialog window for sorting products
     /// </summary>
     public partial class SortProductWindow : Window
     {
@@ -23,30 +23,45 @@ namespace WarehouseApplication.Windows
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Sets true if user chose sorting by name
+        /// </summary>
         private void ByName_Checked(object sender, RoutedEventArgs e)
         {
             byName = true;
             byAmount = false;
         }
 
+        /// <summary>
+        /// Sets true if user chose sorting by amount
+        /// </summary>
         private void ByAmount_Checked(object sender, RoutedEventArgs e)
         {
             byAmount = true;
             byName = false;
         }
 
+        /// <summary>
+        /// Sets true if user chose sorting in ascending order
+        /// </summary>
         private void Ascending_Checked(object sender, RoutedEventArgs e)
         {
             ascending = true;
             descending = false;
         }
 
+        /// <summary>
+        /// Sets true if user chose sorting in descending order
+        /// </summary>
         private void Descending_Checked(object sender, RoutedEventArgs e)
         {
             descending = true;
             ascending = false;
         }
 
+        /// <summary>
+        /// Sorts products by specified parameters
+        /// </summary>
         private void SortButton_Click(object sender, RoutedEventArgs e)
         {
             if (!productDB.SortProducts(byName, byAmount, ascending, descending))

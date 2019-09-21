@@ -4,6 +4,11 @@ using WarehouseApplication.Service;
 
 namespace WarehouseApplication.DB
 {
+    /// <summary>
+    /// Implements interface <see cref="IProductDB"/>
+    /// Keeps file path to .bin file with database
+    /// Keeps information from database in ObservableCollection
+    /// </summary>
     sealed class ProductDB : IProductDB
     {
         public static ObservableCollection<Product> productDB = new ObservableCollection<Product>();
@@ -23,6 +28,8 @@ namespace WarehouseApplication.DB
             {
                 if (productDB[i].Name.Equals(name))
                 {
+                    if (newName == null) newName = productDB[i].Name;
+                    if (newAmount == 0) newAmount = productDB[i].Amount;
                     Product product = new Product(productDB[i].Id, newName, newAmount);
                     productDB.RemoveAt(i);
                     productDB.Insert(i, product);
@@ -65,7 +72,7 @@ namespace WarehouseApplication.DB
 
         public bool CheckProductName(string name)
         {
-            for (int i = 1; i < productDB.Count; i++)
+            for (int i = 0; i < productDB.Count; i++)
             {
                 if (productDB[i].Name.Equals(name)) return false;
             }
@@ -94,6 +101,9 @@ namespace WarehouseApplication.DB
             return true;
         }
 
+        /// <summary>
+        /// Shaker sorting by amount in decsending order
+        /// </summary>
         private void ShakerSortDescendingByAmount()
         {
             for (int i = 0; i < productDB.Count / 2; i++)
@@ -119,6 +129,9 @@ namespace WarehouseApplication.DB
             }
         }
 
+        /// <summary>
+        /// Shaker sorting by amount in acsending order
+        /// </summary>
         private void ShakerSortAsecendingByAmount()
         {
             for (int i = 0; i < productDB.Count / 2; i++)
@@ -144,6 +157,9 @@ namespace WarehouseApplication.DB
             }
         }
 
+        /// <summary>
+        /// Shaker sorting by name in decsending order
+        /// </summary>
         private void ShakerSortDescendingByName()
         {
             for (int i = 0; i < productDB.Count / 2; i++)
@@ -169,6 +185,9 @@ namespace WarehouseApplication.DB
             }
         }
 
+        /// <summary>
+        /// Shaker sorting by name in acsending order
+        /// </summary>
         private void ShakerSortAsecendingByName()
         {
             for (int i = 0; i < productDB.Count / 2; i++)
@@ -194,6 +213,12 @@ namespace WarehouseApplication.DB
             }
         }
 
+        /// <summary>
+        /// Searches in database for the biggest product ID
+        /// </summary>
+        /// <returns>
+        /// The biggest product ID + 1 (next ID for new product)
+        /// </returns>
         private int GetNextId()
         {
             int biggestId = productDB[0].Id;

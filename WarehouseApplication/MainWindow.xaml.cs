@@ -7,7 +7,8 @@ using WarehouseApplication.Service;
 namespace WarehouseApplication
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Creates main window for application.
+    /// Gets user database and product database from files
     /// </summary>
     public partial class MainWindow : Window
     {

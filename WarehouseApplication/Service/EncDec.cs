@@ -2,11 +2,19 @@
 
 namespace WarehouseApplication.Service
 {
+    /// <summary>
+    /// Class with encrypt and decrypt logic
+    /// </summary>
     sealed class EncDec
     {
         private static readonly int key = 33;
         private static readonly char separator = '-';
 
+        /// <summary>
+        /// Encrypt given string line with the key
+        /// </summary>
+        /// <param name="line">String, line that should be encrypted</param>
+        /// <returns>String, encrypted line</returns>
         internal static string Encrypt(string line)
         {
             string encryptedLine = "";
@@ -18,6 +26,11 @@ namespace WarehouseApplication.Service
             return encryptedLine;
         }
 
+        /// <summary>
+        /// Decrypt given string line with the key
+        /// </summary>
+        /// <param name="line">String, line that should be decrypted</param>
+        /// <returns>String, decrypted line</returns>
         internal static string Decrypt(string line)
         {
             string decryptedLine = "";
